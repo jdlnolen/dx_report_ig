@@ -5,8 +5,16 @@ Profile: DxReport
 Parent: DiagnosticReport
 Description: "An example profile of the DiagnosticReport resource."
 * identifier 1..* MS
+* status 1..1 MS
+* code 1..1 MS
 * supportingInfo 0..* MS
 
+Instance: DxReportExample
+InstanceOf: DxReport
+Description: "An example of a diagnostic report."
+* identifier.value = "1234"
+* status = #final
+* code = #1234
 
 
  
