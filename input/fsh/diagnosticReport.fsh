@@ -29,9 +29,24 @@ Description: "An example profile of the DiagnosticReport resource."
 * conclusionCode 0..* MS
 * presentedForm 0..* MS
 
+Instance: EveAnyperson
+InstanceOf: Patient
+Usage: #inline // #inline means this instance should not be exported as a separate example
+* name.given[0] = "Eve"
+* name.family = "Anyperson"
+
 Instance: DxReportExample
 InstanceOf: DxReport
 Description: "An example of a diagnostic report."
-* identifier.value = "1234"
+* identifier.value = "S-23-1234"
 * status = #final
 * code = #99999-99
+* subject = Reference(PatientExample)
+
+Instance: PatientExample
+InstanceOf: Patient
+Description: "An example of a patient."
+* identifier.value = "123456"
+* name.family = "Doe"
+* name.given = "John"
+
