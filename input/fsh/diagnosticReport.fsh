@@ -1,8 +1,4 @@
-// This is a simple example of a FSH file.
-// This file can be renamed, and additional FSH files can be added.
-// SUSHI will look for definitions in any file using the .fsh ending.
-
-//TODO add in rest of core elements 
+//TODO look at composition!!!!
 
 Profile: DxReport
 Parent: DiagnosticReport
@@ -37,7 +33,12 @@ Description: "An example of a diagnostic report."
 * code = #99999-99
 * subject = Reference(PatientExample)
 * encounter = Reference(EncounterExample)
-* conclusion = "this is the conclusion"
+* specimen = Reference(SpecimenExample) 
+* result[0] = Reference(ObservationExampleGross) 
+* result[1] = Reference(ObservationExampleMicro) 
+* result[2] = Reference(ObservationExampleFinalDiagnosis) 
+* result[3] = Reference(ObservationExampleDiagnosisComment) 
+* conclusion = "This is the summary"
 
 Instance: EncounterExample
 InstanceOf: Encounter
@@ -53,6 +54,59 @@ Description: "An example of a patient."
 * identifier.value = "123456"
 * name.family = "Doe"
 * name.given = "John"
+
+Instance: SpecimenExample
+InstanceOf: Specimen
+Description: "An example of a specimen."
+* identifier.value = "4343524"
+* accessionIdentifier.value = "S-23-1234-1"
+* subject = Reference(PatientExample) 
+
+Instance: ObservationExampleMicro
+InstanceOf: Observation
+Description: "Observation of microscopic findings."
+* identifier.value = "23-1-23421-M"
+* status = #final
+* code = http://loinc.org#LP40224-5 
+* subject = Reference(PatientExample)
+* encounter = Reference(EncounterExample)
+* specimen = Reference(SpecimenExample) 
+* valueString = "microscopic findings"
+
+Instance: ObservationExampleGross
+InstanceOf: Observation
+Description: "Observation of gross description."
+* identifier.value = "23-1-23421-G"
+* status = #final
+* code = http://loinc.org#24419-4
+* subject = Reference(PatientExample)
+* encounter = Reference(EncounterExample)
+* specimen = Reference(SpecimenExample) 
+* valueString = "gross description of specimens"
+
+Instance: ObservationExampleFinalDiagnosis
+InstanceOf: Observation
+Description: "Observation of final diagnosis."
+* identifier.value = "23-1-23421-F"
+* status = #final
+* code = http://loinc.org#22637-3 
+* subject = Reference(PatientExample)
+* encounter = Reference(EncounterExample)
+* specimen = Reference(SpecimenExample) 
+* valueString = "final diagnosis of case"
+
+Instance: ObservationExampleDiagnosisComment
+InstanceOf: Observation
+Description: "Observation of diagnosis comment."
+* identifier.value = "23-1-23421-C"
+* status = #final
+* code = http://loinc.org#22638-1 
+* subject = Reference(PatientExample)
+* encounter = Reference(EncounterExample)
+* specimen = Reference(SpecimenExample) 
+* valueString = "diagnosis comment of case"
+
+
 
 
 
